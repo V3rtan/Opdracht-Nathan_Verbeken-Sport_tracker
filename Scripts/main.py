@@ -8,6 +8,7 @@ Created on Fri Nov 14 11:42:05 2025
 import db_communicatie
 import sys
 import Oefening as oef
+import Workout
 
 def maakKeuze():
     print("\n \n \n \n"
@@ -17,6 +18,8 @@ def maakKeuze():
                   "2: print Oefeningen\n"
                   "3: voeg nieuwe oefening toe\n"
                   "4: voeg nieuwe workout toe\n"
+                  "5: verwijder een workout   \n"
+                  "6: Verwijder een Oefening   \n"
                   
                   
                   
@@ -43,15 +46,21 @@ if __name__ == "__main__":
         match keuze:
             case "1":
                 print("workouts worden geprint")
-                print(db.getTabelWorkouts())
+                for i in db.getTabelWorkouts():
+                    print(i)
             case "2":
                 print("oefeningen worden geprint")
-                print(db.getTabelOefeningen())
+                for i in db.getTabelOefeningen():
+                    print(i)
             case "3":
                 print("nieuwe oefening wordt toegevoegd")
-                naam = input("geef de naam van de nieuwe oefening")
-                beschrijving = input("geef een beschrijving van de oefening")
-                oefening = oef.Oefeningen(naam, beschrijving, db)
+                oefening = oef.Oefeningen(db)
+                oefening.add(db)
+            case "4":
+                print("nieuwe Workout wordt toegevoegd")
+                workout = Workout.Workout(db)
+                workout.add(db)
+                
                 
                 
                 

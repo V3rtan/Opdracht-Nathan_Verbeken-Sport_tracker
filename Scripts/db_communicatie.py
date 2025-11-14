@@ -9,21 +9,36 @@ import instellingen
 
 class Db_comm:
     def __init__ (self):
-        self.dbconnectie = sqlite3.connect(instellingen.path_DB)
-        self.mijncursor = self.dbconnectie.cursor()
+        pass  
 
     #haalt bestanden uit de tabellen
     def getQuery(self,query):
         try:
+            self.connect()
             self.mijncursor.execute(query)
             tabel = self.mijncursor.fetchall()
             return tabel
         except sqlite3.Error as e:
-            print("query gefaald: " + e)
+            print("query gefaald: ", e)
             return None
         except:
             print("querry is gefaald")
             return None
+        finally:
+            self.close()
+        
+    def putQuery(self,query,values):
+        try:
+            self.connect()
+            self.mijncursor.execute(query,values)
+            print(query,values)
+            self.dbconnectie.commit()
+            print("oefening toegevoegd")
+        except sqlite3.Error as e:
+            print("toevoegen mislukt: ", e)
+        finally:
+            self.close()
+            
         
     #Returned de tabel Oefeningen
     def getTabelOefeningen(self):          
@@ -33,10 +48,35 @@ class Db_comm:
     def getTabelWorkouts(self):  
         return self.getQuery("SELECT workout_id,oefeningen_id,datum,reps,tijd,notities FROM Workouts")
     
-    #genereert een nieuw id
+    #genereert een nieuw id voor oefening
     def getNewIdOefeningen(self):
-        return int((self.getQuery("SELECT max(oefening_id) FROM Oefeningen")[0][0])) +1
+        temp_id = self.getQuery("SELECT max(oefening_id) FROM Oefeningen")[0][0]
+        if temp_id != None:
+            return int(temp_id) +1
+        else:
+            return int(1)
+    
+    #genereert een nieuw id voor workout
+    def getNewIdWorkouts(self):
+        temp_id = (self.getQuery("SELECT max(workout_id) FROM Workouts")[0][0])
+        if temp_id != None:
+            return int(temp_id) +1
+        else:
+            return int(1)
         
     #pushed nieuwe oefening naar de database
-    def voegOefeningToe(self,oefening_naam,oefening_id):
-        print("voeg oefeningen toe")
+    def voegOefeningToe(self,oefening_id, oef_naam, beschrijving):
+        self.putQuery(("INSERT INTO Oefeningen (oefening_id,naam,beschrijving) VALUES (?,?,?)"),(oefening_id,oef_naam,beschrijving))
+        
+    #pushed nieuwe oefening naar de database
+    def voegWorkoutToe(self, workout_id, oef_id , datum, reps, tijd, notities):
+        self.putQuery(("INSERT INTO Workouts (workout_id,oefeningen_id,datum,\
+                       reps,tijd,notities)VALUES (?,?,?,?,?,?)"),(workout_id, oef_id, datum,reps,tijd,notities))
+        
+    def connect(self):
+        self.dbconnectie = sqlite3.connect(instellingen.path_DB)
+        self.mijncursor = self.dbconnectie.cursor()
+        
+    #sluit connectie
+    def close(self):
+        self.dbconnectie.close()        
