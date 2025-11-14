@@ -1,3 +1,4 @@
 .env
 venv/
 instellingen.py
+__pycache__/
