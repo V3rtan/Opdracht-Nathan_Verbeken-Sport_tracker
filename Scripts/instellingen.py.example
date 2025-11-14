@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 """
 Created on Fri Nov 14 12:23:39 2025
@@ -5,4 +6,13 @@ Created on Fri Nov 14 12:23:39 2025
 @author: Nathan Verbeken
 """
 
+=======
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov 14 12:23:39 2025
+
+@author: Nathan Verbeken
+"""
+
+>>>>>>> 04b6a46e35ed9add2b452df96a394c5f078071e5
 path_DB = "c:/____"
