@@ -4,9 +4,9 @@
 
 -- doel van het programma --
 
-Het doel van dit programma is op een effectieve manier bijhouden welke sporten de gebruiker beoefend heeft. 
+Het doel van dit programma is op een effectieve manier bijhouden welke sporten de gebruiker beoefend heeft.
 
-Hierbij kan het volgende worden bijgehouden. 
+Hierbij kan het volgende worden bijgehouden.
 
 Bij de oefeningen:
 
@@ -27,7 +27,7 @@ Bij de Workouts:
 
 -- functies van het programma --
 
-Het programma bevat 7 verschillende functies, namelijk: 
+Het programma bevat 7 verschillende functies, namelijk:
 
 * het tonen van de tabel met de oefeningen
 * het tonen van de tabel met de workouts
@@ -36,7 +36,8 @@ Het programma bevat 7 verschillende functies, namelijk:
 * het verwijderen van een oefening
 * het verwijderen van een workout
 * het wegschrijven workouts naar een csv bestand. Hier worden beide tabellen ook samengevoegd zodat de naam van de oefening ook bij de workout te zien is.
-* 
+
+
 
 
 
@@ -44,7 +45,7 @@ Het programma bevat 7 verschillende functies, namelijk:
 
 open de volgende file:
 
-&nbsp;	./Scripts/instellingen.py
+ 	./Scripts/instellingen.py
 
 geef hier je gewenste pad in naar de database en csv bestand, zoals te zien in het example bestand.
 
