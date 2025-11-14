@@ -10,6 +10,7 @@ import sys
 import Oefening as oef
 import Workout
 import csv
+import instellingen
 
 def maakKeuze():
     print("\n \n \n \n"
@@ -94,9 +95,12 @@ if __name__ == "__main__":
                     except:
                         print(temp_oef + " is geen geldige oefening id") 
             case "7":
-                print("excel bestand wordt gemaatkt")
+                print("excel bestand wordt gemaakt")
                 tabel = db.getJoinedTabel()
-                print(tabel)
+                with open(instellingen.path_CSV, mode='w') as file:
+                    writer = csv.writer(file)
+                    for x in tabel:
+                        writer.writerow(x)
                 
                 
                 
