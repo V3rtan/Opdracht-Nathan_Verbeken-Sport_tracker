@@ -26,7 +26,8 @@ class Db_comm:
             return None
         finally:
             self.close()
-        
+    
+    #pushed nieuwe waarden in de database
     def putQuery(self,query,values):
         try:
             self.connect()
@@ -70,17 +71,21 @@ class Db_comm:
     def voegWorkoutToe(self, workout_id, oef_id , datum, reps, tijd, notities):
         self.putQuery(("INSERT INTO Workouts (workout_id,oefeningen_id,datum,\
                        reps,tijd,notities)VALUES (?,?,?,?,?,?)"),(workout_id, oef_id, datum,reps,tijd,notities))
-        
+                      
+    #maakt connectie met de database
     def connect(self):
         self.dbconnectie = sqlite3.connect(instellingen.path_DB)
         self.mijncursor = self.dbconnectie.cursor()
         
+    #verwijderd een workout
     def removeWorkout(self, workout_id):
         self.putQuery(("DELETE FROM Workouts WHERE workout_id = ?"),(workout_id,))
-        
+    
+    #verwijderd een oefening    
     def removeOef(self, oef_id):
         self.putQuery(("DELETE FROM Oefeningen WHERE oefening_id = ?"),(oef_id,))
         
+    #voegt beide tabellen samen op id_oefening    
     def getJoinedTabel(self):
         return self.getQuery("SELECT W.*,O.naam FROM Workouts W JOIN Oefeningen O ON W.oefeningen_id = O.oefening_id")
         

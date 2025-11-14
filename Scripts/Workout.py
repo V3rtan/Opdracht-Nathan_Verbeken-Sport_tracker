@@ -13,15 +13,17 @@ class Workout:
         tabelOefeningen = db.getTabelOefeningen()
         tabelOefNamen = [x[0:2] for x in tabelOefeningen]
         print(tabelOefNamen)
-        i_naam = input("gebruik een bestaande oefening door een van bovenstaande namen of id's te gebruiken."
-                       "\nOf typ een nieuwe oefeningnaam: "
-                       ).strip().title()
-        for tple in tabelOefeningen:
-            if i_naam == str(tple[0]) or i_naam == tple[1]:
-                self.id_oef = tple[0]
-        if self.id_oef == None:
-            oefening = oef.Oefeningen(db)
-            oefening.add(db)
+        i_naam = input("gebruik een bestaande oefening door een van bovenstaande"
+                       " namen of id's te gebruiken.").strip().title()
+        tr = True
+        while tr == True:
+            for tple in tabelOefeningen:
+                if i_naam == str(tple[0]) or i_naam == tple[1]:
+                    self.id_oef = tple[0]
+                    tr = False
+            if self.id_oef == None:
+                i_naam = input("geen geldige waarde, probeer opnieuw")
+            
         self.id_workout = db.getNewIdWorkouts()
         print("geef de datum in van deze oefening (formaat: (dd-mm-jjjj)")
         self.datum = self.datumInvoegen()
@@ -30,11 +32,12 @@ class Workout:
         self.notities = input("Indien gewenst kan je hier nog enkele notities aan toevoegen: ")
         
         
-        
+    #voegt een nieuwe workout toe aan de database
     def add(self,db): 
         db.voegWorkoutToe(self.id_workout,self.id_oef,self.datum.date(),self.reps,self.tijd,self.notities)
         
         
+    #controleerd of de datum wel van het juiste formaat is
     def datumInvoegen(self):
         while True:
             datum = input()

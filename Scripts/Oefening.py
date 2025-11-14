@@ -17,7 +17,7 @@ class Oefeningen:
         self.beschrijving = beschrijving
         self.id_oef = db.getNewIdOefeningen()
         
-
+    #voegt een nieuwe oefening toe aan de database
     def add(self,db): 
         db.voegOefeningToe(self.id_oef,self.naam,self.beschrijving)
         
