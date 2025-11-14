@@ -41,4 +41,4 @@ class Workout:
             try:
                 return datetime.strptime(datum,"%d-%m-%Y" )
             except ValueError:
-                print(datum + " is een ongeldige datum, probeer het opnieuw (dd-mm-jjjj)")
+                print(datum + " is een ongeldige datum, probeer het opnieuw (dd-mm-jjjj): ")

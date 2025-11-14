@@ -31,11 +31,9 @@ class Db_comm:
         try:
             self.connect()
             self.mijncursor.execute(query,values)
-            print(query,values)
             self.dbconnectie.commit()
-            print("oefening toegevoegd")
         except sqlite3.Error as e:
-            print("toevoegen mislukt: ", e)
+            print("pushen mislukt: ", e)
         finally:
             self.close()
             
@@ -76,6 +74,12 @@ class Db_comm:
     def connect(self):
         self.dbconnectie = sqlite3.connect(instellingen.path_DB)
         self.mijncursor = self.dbconnectie.cursor()
+        
+    def removeWorkout(self, workout_id):
+        self.putQuery(("DELETE FROM Workouts WHERE workout_id = ?"),(workout_id,))
+        
+    def removeOef(self, oef_id):
+        self.putQuery(("DELETE FROM Oefeningen WHERE oefening_id = ?"),(oef_id,))
         
     #sluit connectie
     def close(self):

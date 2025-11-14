@@ -28,8 +28,16 @@ def maakKeuze():
     return keuze
 
 
-
-
+def printTableworkouts():
+    print("workouts worden geprint")
+    for i in db.getTabelWorkouts():
+        print(i)
+        
+        
+def printTableOef():
+    print("oefeningen worden geprint")
+    for i in db.getTabelOefeningen():
+        print(i)
 
 
 
@@ -45,13 +53,9 @@ if __name__ == "__main__":
             
         match keuze:
             case "1":
-                print("workouts worden geprint")
-                for i in db.getTabelWorkouts():
-                    print(i)
+                printTableworkouts()
             case "2":
-                print("oefeningen worden geprint")
-                for i in db.getTabelOefeningen():
-                    print(i)
+                printTableOef()
             case "3":
                 print("nieuwe oefening wordt toegevoegd")
                 oefening = oef.Oefeningen(db)
@@ -60,9 +64,34 @@ if __name__ == "__main__":
                 print("nieuwe Workout wordt toegevoegd")
                 workout = Workout.Workout(db)
                 workout.add(db)
-                
-                
-                
+            case "5":
+                printTableworkouts()
+                workouts = [x[0] for x in db.getTabelWorkouts()]
+                while True:
+                    workout = input("geef het id van de workout dat je wilt verwijderen of typ quit")
+                    if workout == "quit":
+                        break
+                    try:
+                        temp = int(workout)
+                        if temp in workouts:
+                            db.removeWorkout(temp)
+                            break
+                    except:
+                        print(workout + " is geen geldige workout id")     
+            case "6":
+                printTableOef()
+                oefeningen = [x[0] for x in db.getTabelOefeningen()]
+                while True:
+                    temp_oef = input("geef het id van de oefening dat je wilt verwijderen of typ quit")
+                    if temp_oef == "quit":
+                        break
+                    try:
+                        temp = int(temp_oef)
+                        if temp in oefeningen:
+                            db.removeOef(temp)
+                            break
+                    except:
+                        print(temp_oef + " is geen geldige oefening id") 
                 
                 
                 
@@ -74,7 +103,11 @@ if __name__ == "__main__":
             case _:
                 print("geen geldige optie, probeer opnieuw")
         input("druk op enter om door te gaan")
-    
+        
+        
+        
+        
+
 
 
 
