@@ -5,5 +5,5 @@ Created on Fri Nov 14 12:23:39 2025
 @author: Nathan Verbeken
 """
 
-path_DB = "C:/"
-path_CSV = "C:/"
+path_DB = "./DB_Opdracht-Nathan_Verbeken-Sport_tracker.db"
+path_CSV = "./csv_Opdracht-Nathan-Verbeken.csv"
