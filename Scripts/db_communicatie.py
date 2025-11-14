@@ -81,6 +81,9 @@ class Db_comm:
     def removeOef(self, oef_id):
         self.putQuery(("DELETE FROM Oefeningen WHERE oefening_id = ?"),(oef_id,))
         
+    def getJoinedTabel(self):
+        return self.getQuery("SELECT W.*,O.naam FROM Workouts W JOIN Oefeningen O ON W.oefeningen_id = O.oefening_id")
+        
     #sluit connectie
     def close(self):
         self.dbconnectie.close()        

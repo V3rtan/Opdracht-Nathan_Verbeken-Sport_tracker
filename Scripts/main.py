@@ -9,6 +9,7 @@ import db_communicatie
 import sys
 import Oefening as oef
 import Workout
+import csv
 
 def maakKeuze():
     print("\n \n \n \n"
@@ -20,7 +21,7 @@ def maakKeuze():
                   "4: voeg nieuwe workout toe\n"
                   "5: verwijder een workout   \n"
                   "6: Verwijder een Oefening   \n"
-                  
+                  "7: Maak een excel bestand van de workouts\n"
                   
                   
                   "0: programma afsluiten \n \n"
@@ -92,8 +93,10 @@ if __name__ == "__main__":
                             break
                     except:
                         print(temp_oef + " is geen geldige oefening id") 
-                
-                
+            case "7":
+                print("excel bestand wordt gemaatkt")
+                tabel = db.getJoinedTabel()
+                print(tabel)
                 
                 
                 
